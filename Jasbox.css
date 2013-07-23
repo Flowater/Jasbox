@@ -1,0 +1,35 @@
+header{
+	text-align:center;
+	width:800px;
+}
+div#dMain{
+	width:800px;
+	display:-moz-box;
+	display:-webkit-box;
+	-moz-box-orient:horizontal;
+	-webkit-box-orient:horizontal;
+}
+div#dLeft td{
+	border-width:1px;
+	width:80px;
+	height:80px;
+	background:#ccc;
+}
+div#dRight{
+	padding-left:10px;
+	width:240px;
+	display:-moz-box;
+	display:-webkit-box;
+	-moz-box-orient:vertical;
+	-webkit-box-orient:vertical;
+}
+div#dShowPic{
+	border:none;
+	width:400px;
+	height:400px;
+}
+td{
+	background:#ccc;
+	padding:0px;
+	margin:0px;
+}

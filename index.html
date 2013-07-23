@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>拼图游戏</title>
+		<meta name="keyword" content="Jasbox,Flowater,Lu Lingniu">
+		<link href="css/Jasbox.css">
+		<script src="js/Jasbox.js"></script>
+	</head>
+	<body onload="window_onload()">
+		<header>
+			<h1>JigSaw</h1>
+		</header>
+		<div id="dMain">
+			<div id="dLeft">
+				<table border="0" cellspacing="1" cellpadding="1" id="leftTable">
+					<tr>
+						<td tag="td"></td>
+						<td tag="td"></td>
+						<td tag="td"></td>
+					</tr>
+					<tr>
+						<td tag="td"></td>
+						<td tag="td"></td>
+						<td tag="td"></td>
+					</tr>
+					<tr>
+						<td tag="td"></td>
+						<td tag="td"></td>
+						<td tag="td"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="dRight">
+				<div id="dSelectPic">
+					选择图片：
+					<input type="file" id="file" onchange="selectFile()" accept="image/*" />
+					<input type="button" id="createPuzzle" value="创建拼图" disabled="disabled" onclick="drawTable()" />
+				</div>
+				<div id="dShowPic">
+					请选择文件
+				</div>
+				<div id="dHiddenPic"> 
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
