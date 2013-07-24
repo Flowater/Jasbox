@@ -1,4 +1,9 @@
-﻿//Global variable
+/**
+ *No IE browsers
+ *when you move all the pictures from the right to the left, you maybe make it.
+ *If not, click F5 and try it again.
+ */
+//Global variable
 var image,imageWidth,imageHeight,draggedCanvas;
 var showPic = document.getElementById("dShowPic"),
 	hiddenPic = document.getElementById("dHiddenPic"),
@@ -6,7 +11,7 @@ var showPic = document.getElementById("dShowPic"),
 	crPuzzle = document.getElementById("createPuzzle");
 document.ondragover = function(e) { e.preventDefault(); };
 document.ondrop = function(e) { e.preventDefault(); };
-
+//Choose a image from the client by the File API and then draw it by the canvas API
 function selectFile(){
 	var td;
 	//3*3 blocks
@@ -29,7 +34,7 @@ function selectFile(){
 		hiddenPic.appendChild(canvas);
 		var ctx = canvas.getContext('2d');
 		image = new Image();
-		image.src = window.URL.createObjectURL(file);//更多信息：https://developer.mozilla.org/zh-CN/docs/DOM/window.URL.createObjectURL
+		image.src = window.URL.createObjectURL(file);//For More Information：https://developer.mozilla.org/zh-CN/docs/DOM/window.URL.createObjectURL
 		image.onload = function(){
 			ctx.drawImage(image, 0, 0);
 			imageWidth = image.width;
@@ -38,7 +43,7 @@ function selectFile(){
 		crPuzzle.disabled = "";
 	}
 }
-//下面Canvas API施展平台
+//cut into 9 parts
 function drawTable(){
 	var canvasArray, canvas, ctx, index, count, table,
 		picW = 240,
@@ -62,7 +67,7 @@ function drawTable(){
 					var dt = e.dataTransfer;
 					dt.effectAllowed = 'all';
 					dt.setData("text/plain", draggedCanvas.getAttribute("index"));
-					},false);
+			},false);
 			ctx.fillRect(0,0,canvas.width, canvas.height);
 			ctx.drawImage(image, j*imageWidth/3, i*imageHeight/3,imageWidth/3,imageHeight/3,0, 0, picW/3,picH/3);
 			canvasArray.push(canvas);
@@ -80,11 +85,11 @@ function drawTable(){
 			td.addEventListener("drop",function(e){
 					var td = e.srcElement||e.target;
 					if(td.getAttribute("tag")!=null){
-					td.appendChild(draggedCanvas);
+						td.appendChild(draggedCanvas);
 					}
 					e.preventDefault();
 					e.stopPropagation();
-					},false);
+			},false);
 			tr.appendChild(td);
 			index = parseInt(Math.random()*count);
 			td.appendChild(canvasArray[index]);
@@ -97,37 +102,37 @@ function drawTable(){
 	crPuzzle.disabled = "disabled";
 }
 
-function window_onload(){
+window.onload = function(){
 	var td;
 	for(var i=0;i<3;i++){
 		for(var j=0;j<3;j++){
 			td = tb.rows[i].cells[j];
 			td.addEventListener("draggend", function(e){
 					e.preventDefault();
-					},false);
+			},false);
 			td.addEventListener("drop",function(e){
 					var td = e.srcElement||e.target;
 					if(td.getAttribute("tag")!= null){
-					td.appendChild(draggedCanvas);
+						td.appendChild(draggedCanvas);
 					}
 					var allHaveFlag = true;
 					var indexStr = "";
 					for(var i=0;i<3;i++){
-					for(var j=0;j<3;j++){
-					canvas = document.getElementById("leftTable").rows[i].cells[j].children[0];
-					if(canvas == null){
-					allHavaFlag = false;
-					indexStr = "";
-					break;
+						for(var j=0;j<3;j++){
+							canvas = document.getElementById("leftTable").rows[i].cells[j].children[0];
+							if(canvas == null){
+								allHavaFlag = false;
+								indexStr = "";
+								break;
+							}else{
+								indexStr += canvas.getAttribute("index");
+							}
+						}
 					}
-					else{
-					indexStr += canvas.getAttribute("index");
-					}
-					}
-					}
-					var allStr = "0123456789";
+					var allStr = "012345678";
+					//Index =="012345678", that is to say you have made it
 					if(allHaveFlag&&indexStr ==allStr){
-						alert("You make it");
+						alert("Yeah, You Make It！Do you want to try another picture? Click F5, and try again.");
 					}
 					e.preventDefault();
 					e.stopPropagation();
